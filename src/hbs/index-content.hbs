@@ -2,8 +2,7 @@
   <!-- begin github-header -->
   <header class="github-header">
     <div class="row">
-      <h1 class="github-header__title">Список репозиториев <span id="github-header__title-name">Odinokun</span></h1>
-
+      <h1 class="github-header__title">Список репозиториев пользователя <span id="github-header__title-name">Odinokun</span></h1>
       <div class="github-header__ava">
         <img src="https://avatars1.githubusercontent.com/u/10399559?v=4" alt="avatar" id="github-header__ava-img">
       </div>
@@ -28,7 +27,7 @@
   <section class="github-title">
     <div class="row">
       <div class="github-title__item item-50">
-        <h2 class="github-title__title">Все репозитории</h2>
+        <h2 class="github-title__title">Все репозитории (<span id="github-title__title--all"></span>)</h2>
       </div>
       <div class="github-title__item item-50">
         <h2 class="github-title__title">Отфильтрованные репозитории</h2>
@@ -40,7 +39,7 @@
   <!-- begin github-body -->
   <section class="github-body">
     <!-- begin github-body-left -->
-    <section class="github-body__left item-50">
+    <section class="github-body__left item-50" id="github-body__left">
 
       {{> "./github-rep.hbs"}}
 
