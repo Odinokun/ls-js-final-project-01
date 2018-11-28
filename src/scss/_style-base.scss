@@ -15,12 +15,7 @@ html {
   line-height: 1.38;
 }
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-width: 320px;
-  background-image: linear-gradient(180deg,hsla(0,0%,100%,0) 60%,#fff),linear-gradient(70deg,#dbedff 32%,#ebfff0);
 }
 input,
 textarea,
@@ -48,6 +43,15 @@ a {
 svg {
   display: block;
   overflow: visible;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 30px;
+  background-image: linear-gradient(180deg,hsla(0,0%,100%,0) 60%,#fff),linear-gradient(70deg,#dbedff 32%,#ebfff0);
 }
 .row {
   display: flex;

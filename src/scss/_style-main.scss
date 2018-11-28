@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
-  max-height: 90vh;
+  max-width: 1000px;
   padding: 30px;
   border: 1px solid #d1d5da;
   border-radius: 3px;
@@ -96,22 +95,23 @@
   margin-right: 20px;
   border: 1px solid #d1d5da;
   border-radius: 50%;
+  background-image: url('./img/github.jpg');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
-  &--js {
+  &--JavaScript {
     background-image: url('./img/js.jpg');
   }
-  &--css {
+  &--CSS {
     background-image: url('./img/css.jpg');
   }
-  &--html {
+  &--HTML {
     background-image: url('./img/html.jpg');
   }
-  &--php {
+  &--PHP {
     background-image: url('./img/php.jpg');
   }
-  &--python {
+  &--PYTHON {
     background-image: url('./img/python.jpg');
   }
 }
@@ -140,12 +140,11 @@
   border-right: 1px solid #d1d5da;
   border-bottom: 1px solid #d1d5da;
 
-
   .github-rep__btn {
-    transform: rotate(45deg);
     background-color: #28a745;
     svg {
       fill: #fff;
+      transform: rotate(45deg);
     }
   }
 }
