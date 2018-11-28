@@ -1,0 +1,78 @@
+<section id="github" class="github">
+  <!-- begin github-header -->
+  <header class="github-header">
+    <div class="row">
+      <h1 class="github-header__title">Список репозиториев '<span>odinokun</span>'</h1>
+      <div class="github-header__ava">
+        <img src="https://avatars1.githubusercontent.com/u/10399559?v=4" alt="avatar">
+      </div>
+    </div>
+  </header>
+  <!-- end   github-header -->
+
+  <!-- begin github-filter -->
+  <section class="github-filter">
+    <section class="row">
+      <div class="github-filter__item item-50">
+        <input type="search" placeholder="Фильтр репозиториев">
+      </div>
+      <div class="github-filter__item item-50">
+        <input type="search" placeholder="Фильтр репозиториев">
+      </div>
+    </section>
+  </section>
+  <!-- end   github-filter -->
+
+  <!-- begin github-title -->
+  <section class="github-title">
+    <div class="row">
+      <div class="github-title__item item-50">
+        <h2 class="github-title__title">Все репозитории</h2>
+      </div>
+      <div class="github-title__item item-50">
+        <h2 class="github-title__title">Отфильтрованные репозитории</h2>
+      </div>
+    </div>
+  </section>
+  <!-- end   github-title -->
+
+  <!-- begin github-body -->
+  <section class="github-body">
+    <!-- begin github-body-left -->
+    <section class="github-body__left item-50">
+
+      {{> "./github-rep.hbs"}}
+
+    </section>
+    <!-- end   github-body-left -->
+
+    <!-- begin github-body-right -->
+    <section class="github-body__right item-50">
+      <!-- begin github-rep -->
+      <div class="github-rep">
+        <span class="github-rep__ava github-rep__ava--css"></span>
+        <h3 class="github-rep__title">super title from github super title from github super title from github</h3>
+        <button class="github-rep__btn">
+          <svg width="12" height="16">
+            <path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- end   github-rep -->
+
+      {{> "./github-rep.hbs"}}
+
+    </section>
+    <!-- end   github-body-right -->
+  </section>
+  <!-- end   github-body -->
+
+  <!-- begin github__footer -->
+  <footer class="github__footer">
+    <div class="row">
+      <button class="btn btn--grey">Сменить пользователя</button>
+      <button class="btn btn--green">Сохранить</button>
+    </div>
+  </footer>
+  <!-- end   github__footer -->
+</section>
