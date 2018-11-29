@@ -81,6 +81,7 @@
   align-items: center;
   flex-wrap: nowrap;
   padding: 10px 20px;
+  cursor: grab;
 }
 .github-rep__ava {
   font-size: 14px;
@@ -93,6 +94,7 @@
   width: 40px;
   height: 40px;
   margin-right: 20px;
+  pointer-events: none;
   border: 1px solid #d1d5da;
   border-radius: 50%;
   background-image: url('./img/github.jpg');
@@ -118,6 +120,8 @@
 .github-rep__title {
   font-weight: 600;
   margin-right: 10px;
+  user-select: none;
+  pointer-events: none;
 }
 .github-rep__btn {
   display: flex;
@@ -133,8 +137,8 @@
   outline: none;
   background-color: transparent;
   svg {
-    pointer-events: none;
     transition: fill .5s;
+    pointer-events: none;
   }
 }
 .github-body__left {

@@ -17,9 +17,6 @@ const allRepo = document.getElementById('github-title__title--all');
 const leftColumn = document.getElementById('github-body__left');
 // правая колонка
 const rightColumn = document.getElementById('github-body__right');
-// массивы для левой и правой колонки
-let leftArray = [];
-let rightArray = [];
 
 loadRepository()
     .then(data => {
@@ -36,7 +33,12 @@ loadRepository()
     })
     .then(data => {
 
-        leftArray = data;
+        // массивы для левой и правой колонки
+        let leftArray = data;
+        let rightArray = [];
+
+        makeDnD([leftColumn, rightColumn]);
+
         // обработали клик на левом списке
         leftColumn.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
@@ -53,11 +55,14 @@ loadRepository()
                 rightArray = rightArray.concat(removed);
 
                 sortArr(rightArray);
+                // обновляем общее кол-во репозиториев
+                allRepo.innerText = leftArray.length;
                 // рендерим оба списка
                 leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
                 rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
             }
         });
+
         // обработали клик на правом списке
         rightColumn.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
@@ -74,10 +79,39 @@ loadRepository()
                 leftArray = leftArray.concat(removed);
 
                 sortArr(leftArray);
+                // обновляем общее кол-во репозиториев
+                allRepo.innerText = leftArray.length;
                 // рендерим оба списка
                 leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
                 rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
             }
         });
+
+        function makeDnD(zones) {
+            let currentDrag;
+
+            zones.forEach(zone => {
+                zone.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/html', 'dragstart');
+                    currentDrag = { source: zone, node: e.target };
+                });
+
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                });
+
+                zone.addEventListener('drop', (e) => {
+                    if (currentDrag) {
+                        e.preventDefault();
+
+                        if (currentDrag.source !== zone) {
+                            zone.insertBefore(currentDrag.node, zone.lastElementChild);
+                        }
+
+                        currentDrag = null;
+                    }
+                });
+            })
+        }
 
     });
