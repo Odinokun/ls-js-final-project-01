@@ -13,8 +13,6 @@ const ava = document.getElementById('github-header__ava-img');
 const userName = document.getElementById('github-header__title-name');
 // общее кол-во репозиториев
 const allRepo = document.getElementById('github-title__title--all');
-// тело репозиториев
-const bodyRep = document.getElementById('github-body');
 // левая колонка
 const leftColumn = document.getElementById('github-body__left');
 // правая колонка
@@ -53,6 +51,26 @@ loadRepository()
 
                 // Добавляем вырезанный элемент в правый массив
                 rightArray = rightArray.concat(removed);
+
+                // рендерим оба списка
+                leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
+                rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
+            }
+        });
+
+        rightColumn.addEventListener('click', e => {
+            if (e.target.tagName === 'BUTTON') {
+                const tar = e.target.parentElement; // цель клика
+                const dataId = Number(tar.getAttribute('data-id')); // data-id клика
+
+                // идентификация объекта в массиве по data-id
+                const index = rightArray.findIndex(obj => obj.id === dataId);
+
+                // вырезаем объект из массива
+                let removed = rightArray.splice(index, 1);
+
+                // Добавляем вырезанный элемент в правый массив
+                leftArray = leftArray.concat(removed);
 
                 // рендерим оба списка
                 leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
