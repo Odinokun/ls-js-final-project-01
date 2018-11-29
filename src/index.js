@@ -1,5 +1,5 @@
 // инклюдим js файлы
-import { loadRepository, sortArr } from './js/funcs';
+import { loadRepository, sortArr, isMatching } from './js/funcs';
 
 import repositoriesFn from './hbs/github-rep.hbs';
 
@@ -16,6 +16,12 @@ const allRepo = document.getElementById('github-title__title--all');
 const leftColumn = document.getElementById('github-body__left');
 // правая колонка
 const rightColumn = document.getElementById('github-body__right');
+// левый фильтр
+const leftFilter = document.getElementById('github-filter__left');
+const leftFilterVal = leftFilter.value;
+// правый фильтр
+const rightFilter = document.getElementById('github-filter__right');
+const rightFilterVal = rightFilter.value;
 
 loadRepository()
     .then(data => {
@@ -143,3 +149,4 @@ loadRepository()
             rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
         }
     });
+

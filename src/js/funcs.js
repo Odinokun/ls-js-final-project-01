@@ -31,7 +31,16 @@ function sortArr(arr) {
     });
 }
 
+// фильтрация
+function isMatching(full, chunk) {
+    chunk = new RegExp(chunk, 'i');
+    let res = full.match(chunk);
+
+    return res !== null;
+}
+
 export {
     loadRepository,
-    sortArr
+    sortArr,
+    isMatching
 }
