@@ -1,6 +1,6 @@
 // инклюдим js файлы
-import { loadRepository } from './js/load';
-// import { test } from './js/add-remove';
+import { loadRepository } from './js/funcs';
+import { sortArr } from './js/funcs';
 
 import repositoriesFn from './hbs/github-rep.hbs';
 
@@ -37,7 +37,7 @@ loadRepository()
     .then(data => {
 
         leftArray = data;
-
+        // обработали клик на левом списке
         leftColumn.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
                 const tar = e.target.parentElement; // цель клика
@@ -52,12 +52,13 @@ loadRepository()
                 // Добавляем вырезанный элемент в правый массив
                 rightArray = rightArray.concat(removed);
 
+                sortArr(rightArray);
                 // рендерим оба списка
                 leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
                 rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
             }
         });
-
+        // обработали клик на правом списке
         rightColumn.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
                 const tar = e.target.parentElement; // цель клика
@@ -72,6 +73,7 @@ loadRepository()
                 // Добавляем вырезанный элемент в правый массив
                 leftArray = leftArray.concat(removed);
 
+                sortArr(leftArray);
                 // рендерим оба списка
                 leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
                 rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
