@@ -1,6 +1,5 @@
 // инклюдим js файлы
-import { loadRepository } from './js/funcs';
-import { sortArr } from './js/funcs';
+import { loadRepository, sortArr } from './js/funcs';
 
 import repositoriesFn from './hbs/github-rep.hbs';
 
@@ -37,8 +36,6 @@ loadRepository()
         let leftArray = data;
         let rightArray = [];
 
-        makeDnD([leftColumn, rightColumn]);
-
         // обработали клик на левом списке
         leftColumn.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
@@ -47,19 +44,14 @@ loadRepository()
 
                 // идентификация объекта в массиве по data-id
                 const index = leftArray.findIndex(obj => obj.id === dataId);
-
                 // вырезаем объект из массива
                 let removed = leftArray.splice(index, 1);
 
                 // Добавляем вырезанный элемент в правый массив
                 rightArray = rightArray.concat(removed);
 
-                sortArr(rightArray);
-                // обновляем общее кол-во репозиториев
-                allRepo.innerText = leftArray.length;
-                // рендерим оба списка
-                leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
-                rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
+                // обновляем инфу
+                newInfo();
             }
         });
 
@@ -71,22 +63,18 @@ loadRepository()
 
                 // идентификация объекта в массиве по data-id
                 const index = rightArray.findIndex(obj => obj.id === dataId);
-
                 // вырезаем объект из массива
                 let removed = rightArray.splice(index, 1);
 
-                // Добавляем вырезанный элемент в правый массив
+                // Добавляем вырезанный элемент в левый массив
                 leftArray = leftArray.concat(removed);
 
-                sortArr(leftArray);
-                // обновляем общее кол-во репозиториев
-                allRepo.innerText = leftArray.length;
-                // рендерим оба списка
-                leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
-                rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
+                // обновляем инфу
+                newInfo();
             }
         });
 
+        makeDnD([leftColumn, rightColumn]);
         function makeDnD(zones) {
             let currentDrag;
 
@@ -104,14 +92,54 @@ loadRepository()
                     if (currentDrag) {
                         e.preventDefault();
 
+                        // console.log('event', currentDrag.node);
+
                         if (currentDrag.source !== zone) {
                             zone.insertBefore(currentDrag.node, zone.lastElementChild);
-                        }
 
+                            if (zone.classList.contains('github-body__left')) {
+                                // перетаскиваемый элемент
+                                const tar = currentDrag.node;
+                                // data-id перетаскиваемого элемента
+                                const dataId = Number(tar.getAttribute('data-id'));
+                                // идентификация объекта в массиве по data-id
+                                const index = rightArray.findIndex(obj => obj.id === dataId);
+                                // вырезаем объект из массива
+                                let removed = rightArray.splice(index, 1);
+
+                                // Добавляем вырезанный элемент в правый массив
+                                leftArray = leftArray.concat(removed);
+
+                            } else if (zone.classList.contains('github-body__right')) {
+                                // перетаскиваемый элемент
+                                const tar = currentDrag.node;
+                                // data-id перетаскиваемого элемента
+                                const dataId = Number(tar.getAttribute('data-id'));
+                                // идентификация объекта в массиве по data-id
+                                const index = leftArray.findIndex(obj => obj.id === dataId);
+                                // вырезаем объект из массива
+                                let removed = leftArray.splice(index, 1);
+
+                                // Добавляем вырезанный элемент в правый массив
+                                rightArray = rightArray.concat(removed);
+
+                            }
+                            // обновляем инфу
+                            newInfo();
+                        }
                         currentDrag = null;
                     }
                 });
             })
         }
 
+        function newInfo() {
+            sortArr(leftArray);
+            sortArr(rightArray);
+            // обновляем общее кол-во репозиториев
+            allRepo.innerText = leftArray.length;
+            // рендерим оба списка заново
+            leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
+            rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
+        }
     });
