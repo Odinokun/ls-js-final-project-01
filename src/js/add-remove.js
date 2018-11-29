@@ -1,22 +1,11 @@
-function loadRepository() {
-    return new Promise((resolve) => {
-        fetch('https://api.github.com/users/odinokun/repos?per_page=100')
-            .then(response => {
-                if (response.status >= 400) {
-                    return Promise.reject();
-                }
+// // кнопка добавления репозитория
+// const addBtn = document.querySelector('github-rep__btn');
+//
+// addBtn.addEventListener('click', e => {
+//     console.log(e);
+//     console.log('click');
+// });
 
-                return response.json()
-            })
-            .then(data => {
-                resolve(data);
-            })
-            .catch(() => {
-                console.log('ERROR');
-            })
-    });
-}
-
-export {
-    loadRepository
-}
+// export {
+//     test
+// }
