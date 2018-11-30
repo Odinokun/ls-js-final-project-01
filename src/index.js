@@ -43,19 +43,22 @@ loadRepository()
         let rightArray = [];
 
         // обработали клик на левом списке
+        // leftColumn.addEventListener('click', handler.bind(null, left, right));
         leftColumn.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
                 const tar = e.target.parentElement; // цель клика
                 const dataId = Number(tar.getAttribute('data-id')); // data-id клика
 
-                // идентификация объекта в массиве по data-id
-                const index = leftArray.findIndex(obj => obj.id === dataId);
-                // вырезаем объект из массива
-                let removed = leftArray.splice(index, 1);
+                // // идентификация объекта в массиве по data-id
+                // const index = leftArray.findIndex(obj => obj.id === dataId);
+                // // вырезаем объект из массива
+                // let removed = leftArray.splice(index, 1);
+                //
+                // // Добавляем вырезанный элемент в правый массив
+                // rightArray = rightArray.concat(removed);
 
-                // Добавляем вырезанный элемент в правый массив
-                rightArray = rightArray.concat(removed);
-
+                // переносим репу вправо
+                leftToRight(dataId);
                 // обновляем инфу
                 newInfo();
             }
@@ -67,14 +70,8 @@ loadRepository()
                 const tar = e.target.parentElement; // цель клика
                 const dataId = Number(tar.getAttribute('data-id')); // data-id клика
 
-                // идентификация объекта в массиве по data-id
-                const index = rightArray.findIndex(obj => obj.id === dataId);
-                // вырезаем объект из массива
-                let removed = rightArray.splice(index, 1);
-
-                // Добавляем вырезанный элемент в левый массив
-                leftArray = leftArray.concat(removed);
-
+                // переносим репу влево
+                rightToLeft(dataId);
                 // обновляем инфу
                 newInfo();
             }
@@ -102,33 +99,15 @@ loadRepository()
 
                         if (currentDrag.source !== zone) {
                             zone.insertBefore(currentDrag.node, zone.lastElementChild);
+                            // перетаскиваемый элемент
+                            const tar = currentDrag.node;
+                            // data-id перетаскиваемого элемента
+                            const dataId = Number(tar.getAttribute('data-id'));
 
-                            if (zone.classList.contains('github-body__left')) {
-                                // перетаскиваемый элемент
-                                const tar = currentDrag.node;
-                                // data-id перетаскиваемого элемента
-                                const dataId = Number(tar.getAttribute('data-id'));
-                                // идентификация объекта в массиве по data-id
-                                const index = rightArray.findIndex(obj => obj.id === dataId);
-                                // вырезаем объект из массива
-                                let removed = rightArray.splice(index, 1);
-
-                                // Добавляем вырезанный элемент в правый массив
-                                leftArray = leftArray.concat(removed);
-
-                            } else if (zone.classList.contains('github-body__right')) {
-                                // перетаскиваемый элемент
-                                const tar = currentDrag.node;
-                                // data-id перетаскиваемого элемента
-                                const dataId = Number(tar.getAttribute('data-id'));
-                                // идентификация объекта в массиве по data-id
-                                const index = leftArray.findIndex(obj => obj.id === dataId);
-                                // вырезаем объект из массива
-                                let removed = leftArray.splice(index, 1);
-
-                                // Добавляем вырезанный элемент в правый массив
-                                rightArray = rightArray.concat(removed);
-
+                            if (zone.classList.contains('github-body__right')) {
+                                leftToRight(dataId);
+                            } else if (zone.classList.contains('github-body__left')) {
+                                rightToLeft(dataId);
                             }
                             // обновляем инфу
                             newInfo();
@@ -137,6 +116,26 @@ loadRepository()
                     }
                 });
             })
+        }
+
+        function leftToRight(id) {
+            // идентификация объекта в массиве по data-id
+            const index = leftArray.findIndex(obj => obj.id === id);
+            // вырезаем объект из массива
+            let removed = leftArray.splice(index, 1);
+
+            // Добавляем вырезанный элемент в правый массив
+            rightArray = rightArray.concat(removed);
+        }
+
+        function rightToLeft(id) {
+            // идентификация объекта в массиве по data-id
+            const index = rightArray.findIndex(obj => obj.id === id);
+            // вырезаем объект из массива
+            let removed = rightArray.splice(index, 1);
+
+            // Добавляем вырезанный элемент в правый массив
+            leftArray = leftArray.concat(removed);
         }
 
         function newInfo() {
