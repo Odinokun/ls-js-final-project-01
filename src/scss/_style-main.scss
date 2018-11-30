@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 1000px;
   width: 100%;
+  max-width: 1000px;
   max-height: 95%;
   padding: 10px 20px;
   border: 1px solid #d1d5da;
@@ -72,9 +72,9 @@
   padding: 10px 20px;
 }
 .github-title__title {
+  font-size: 18px;
   font-weight: 600;
   font-style: italic;
-  font-size: 18px;
 }
 // end github-title
 
@@ -125,6 +125,7 @@
   }
 }
 .github-rep__title {
+  font-size: 18px;
   font-weight: 600;
   margin-right: 10px;
   user-select: none;
