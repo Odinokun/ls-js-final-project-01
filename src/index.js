@@ -12,13 +12,11 @@ const ava = document.getElementById('github-header__ava-img');
 const userName = document.getElementById('github-header__title-name');
 // общее кол-во репозиториев
 const allRepo = document.getElementById('github-title__title--all');
-// левая колонка
+// левая и правая колонка
 const leftColumn = document.getElementById('github-body__left');
-// правая колонка
 const rightColumn = document.getElementById('github-body__right');
-// левый фильтр
+// левый и правый фильтр
 const leftFilter = document.getElementById('github-filter__left');
-// правый фильтр
 const rightFilter = document.getElementById('github-filter__right');
 
 loadRepository()
