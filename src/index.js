@@ -160,7 +160,9 @@ loadRepository()
                     }
                 });
             } else {
-                newInfo();
+                for (let i = 0; i < leftColumn.children.length; i++) {
+                    leftColumn.children[i].classList.remove('hidden');
+                }
             }
         }
         // функция фильтрации правого списка
@@ -190,7 +192,9 @@ loadRepository()
                     }
                 });
             } else {
-                newInfo();
+                for (let i = 0; i < rightColumn.children.length; i++) {
+                    rightColumn.children[i].classList.remove('hidden');
+                }
             }
         }
 
