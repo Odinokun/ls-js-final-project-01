@@ -3,7 +3,9 @@
   flex-direction: column;
   justify-content: space-between;
   max-width: 1000px;
-  padding: 30px;
+  width: 100%;
+  max-height: 95%;
+  padding: 10px 20px;
   border: 1px solid #d1d5da;
   border-radius: 3px;
   background-color: #fff;
@@ -11,11 +13,14 @@
 
 // begin github-header
 .github-header {
-  padding-bottom: 20px;
+  padding: 10px 20px;
   border-bottom: 1px solid #d1d5da;
   .row {
     justify-content: center;
   }
+}
+.github-header__title {
+  font-size: 20px;
 }
 .github-header__ava {
   display: flex;
@@ -39,11 +44,12 @@
   border-bottom: 1px solid #d1d5da;
 }
 .github-filter__item {
-  padding: 20px;
+  padding: 10px 20px;
   input {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
-    min-height: 34px;
+    width: 80%;
+    min-height: 30px;
     padding: 6px 8px;
     vertical-align: middle;
     color: #24292e;
@@ -68,6 +74,7 @@
 .github-title__title {
   font-weight: 600;
   font-style: italic;
+  font-size: 18px;
 }
 // end github-title
 
@@ -142,6 +149,8 @@
   }
 }
 .github-body__left {
+  overflow-x: hidden;
+  overflow-y: auto;
   border-right: 1px solid #d1d5da;
   border-bottom: 1px solid #d1d5da;
 
@@ -154,6 +163,8 @@
   }
 }
 .github-body__right {
+  overflow-x: hidden;
+  overflow-y: auto;
   border-bottom: 1px solid #d1d5da;
 
   .github-rep__btn {
@@ -167,6 +178,6 @@
 
 // begin github__footer
 .github__footer {
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
 }
 // end github__footer
