@@ -18,25 +18,31 @@ const rightColumn = document.getElementById('github-body__right');
 // левый и правый фильтр
 const leftFilter = document.getElementById('github-filter__left');
 const rightFilter = document.getElementById('github-filter__right');
+// кнопка сохранения
+const saveBtn = document.getElementById('save-btn');
+
+let storage = localStorage;
 
 loadRepository()
     .then(data => {
+        // массивы для левой и правой колонки
+        let leftArray = data;
+        let rightArray = [];
+
+        if (localStorage.getItem('leftArrStorage') !== null) {
+            leftArray = JSON.parse(localStorage['leftArrStorage']);
+            rightArray = JSON.parse(localStorage['rightArrStorage']);
+            newInfo();
+        }
+
         // объявляем основную аватарку
         ava.src = data[0].owner.avatar_url;
         // объявляем логин юзера
         userName.innerText = data[0].owner.login;
         // объявляем общее кол-во репозиториев
-        allRepo.innerText = data.length;
+        allRepo.innerText = leftArray.length;
         // заполняем через цикл данные каждого репозитория
         leftColumn.innerHTML = repositoriesFn({ repositoriesList: data });
-
-        return data;
-    })
-    .then(data => {
-
-        // массивы для левой и правой колонки
-        let leftArray = data;
-        let rightArray = [];
 
         // обработали клик на левом списке
         leftColumn.addEventListener('click', e => {
@@ -216,6 +222,12 @@ loadRepository()
             leftColumn.innerHTML = repositoriesFn({ repositoriesList: leftArray });
             rightColumn.innerHTML = repositoriesFn({ repositoriesList: rightArray });
         }
+        
+        // сохранение в localStorage
+        saveBtn.addEventListener('click', () => {
+            localStorage['leftArrStorage'] = JSON.stringify(leftArray);
+            localStorage['rightArrStorage'] = JSON.stringify(rightArray);
+        })
 
     });
 
